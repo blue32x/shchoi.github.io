@@ -22,8 +22,22 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  blue32x
 
+destination: ./blue32x
+
 #avatar
 avatar: /assets/img/me.jpg
+
+
+production_url: https://blue32x.github.io/
+source_url: https://github.com/blue32x/shchoi5480.github.io
+
+safe: False
+lsi: False
+
+username: blue32x
+repo: shchoi5480.github.io
+branch: master
+
 
 pagination:
   enabled: true

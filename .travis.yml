@@ -1,0 +1,23 @@
+# .travis.yml
+sudo: false
+language: ruby
+cache: bundler
+rvm:
+  - 2.4.2
+
+install:
+  # Install Jekyll and dependencies
+  - bundle install
+
+before_script:
+  - git config --global user.email "blue32x@naver.com"
+  - git config --global user.name "blue32x"
+
+script: bundle exec rake site:deploy --quiet #--trace
+
+env:
+  global:
+
+branches:
+  only:
+    - master

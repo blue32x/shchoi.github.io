@@ -1,0 +1,3 @@
+[submodule "blue32x"]
+	path = blue32x
+	url = https://github.com/blue32x/blue32x.github.io
