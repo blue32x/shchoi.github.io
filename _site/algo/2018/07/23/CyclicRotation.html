@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2018 / 07 / 23</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-2">코딜리티 Lesson 2</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+    <p>An array A consisting of N integers is given.</p>
+  </li>
+</ol>
+
+<p>Rotation of the array means that each element is shifted right by one index, and the last element of the array is moved to the first place.</p>
+
+<p>For example, the rotation of array A = [3, 8, 9, 7, 6] is [6, 3, 8, 9, 7] (elements are shifted right by one index and 6 is moved to the first place).</p>
+
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <p>입력은 배열 A, 정수 형 K이다.쉽게 말하면 배열 A를 를 오른쪽으로 K만큼 순환시켜라!</p>
+  </li>
+</ol>
+
+<p>예를 들어서  {3,8,9,7,6}  K=3</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    {6,3,8,9,7}  
+
+    {7,6,3,8,9}
+
+  결과  : {9,7,6,3,8}
+</code></pre></div></div>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<p>진짜 단순하게 k가 0이 될 때까지 오른쪽으로 한칸 씩 이동 시키고 배열의 경계를 넘어간 숫자를 임시로 선언한 변수에 저장하고 있다가.
+이동이 완료된 배열의 첫번째 저장소에 저장한다.
+뭔가 더 쉬운 방법이 있을 것 가은데  당 시에는 생각이 나지 않아서  아래와 같이 처리했다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		 if(A.length ==0)
+		 {
+			 return A;
+		 }
+		 
+		 int[] B=A.clone();
+		 
+		 while((K--) != 0)
+		 {
+			 int shiftedNum=0;
+			 shiftedNum=A[A.length-1];
+			 for(int i=0; i&lt;A.length-1; i++)
+			 {
+				 A[i+1]=B[i];
+			 }
+			 A[0]=shiftedNum;
+			 B=A.clone();
+		 }
+		 
+		 return A;
+	    }
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2018/07/23/CyclicRotation.html';
+  this.page.identifier = '/algo/2018/07/23/CyclicRotation';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/01/08/TruckOntheBridge.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 01 / 08</div>
+
+    
+    
+    <div class="card__excerpt">프로그래머스 : 다리를 지나가는 트럭
+
+  
+    문제
+    https://programmers.co.kr/learn/courses/30/lessons/42583.
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2018/07/22/BinaryGap.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2018 / 07 / 22</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 1 문제 A binary gap within a positive...</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

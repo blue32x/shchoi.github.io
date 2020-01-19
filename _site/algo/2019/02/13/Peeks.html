@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2019 / 02 / 13</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-10">코딜리티 Lesson 10</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty array A consisting of N integers is given.
+
+A peak is an array element which is larger than its neighbors. More precisely, it is an index P such that 0 &lt; P &lt; N − 1,  A[P − 1] &lt; A[P] and A[P] &gt; A[P + 1].
+
+For example, the following array A:
+
+    A[0] = 1
+    A[1] = 2
+    A[2] = 3
+    A[3] = 4
+    A[4] = 3
+    A[5] = 4
+    A[6] = 1
+    A[7] = 2
+    A[8] = 3
+    A[9] = 4
+    A[10] = 6
+    A[11] = 2
+has exactly three peaks: 3, 5, 10.
+
+We want to divide this array into blocks containing the same number of elements. More precisely, we want to choose a number K that will yield the following blocks:
+
+A[0], A[1], ..., A[K − 1],
+A[K], A[K + 1], ..., A[2K − 1],
+...
+A[N − K], A[N − K + 1], ..., A[N − 1].
+What's more, every block should contain at least one peak. Notice that extreme elements of the blocks (for example A[K − 1] or A[K]) can also be peaks, but only if they have both neighbors (including one in an adjacent blocks).
+
+The goal is to find the maximum number of blocks into which the array A can be divided.
+
+Array A can be divided into blocks as follows:
+
+one block (1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2). This block contains three peaks.
+two blocks (1, 2, 3, 4, 3, 4) and (1, 2, 3, 4, 6, 2). Every block has a peak.
+three blocks (1, 2, 3, 4), (3, 4, 1, 2), (3, 4, 6, 2). Every block has a peak. Notice in particular that the first block (1, 2, 3, 4) has a peak at A[3], because A[2] &lt; A[3] &gt; A[4], even though A[4] is in the adjacent block.
+However, array A cannot be divided into four blocks, (1, 2, 3), (4, 3, 4), (1, 2, 3) and (4, 6, 2), because the (1, 2, 3) blocks do not contain a peak. Notice in particular that the (4, 3, 4) block contains two peaks: A[3] and A[5].
+
+The maximum number of blocks that array A can be divided into is three.
+
+Write a function:
+
+class Solution { public int solution(int[] A); }
+
+that, given a non-empty array A consisting of N integers, returns the maximum number of blocks into which A can be divided.
+
+If A cannot be divided into some number of blocks, the function should return 0.
+
+For example, given:
+
+    A[0] = 1
+    A[1] = 2
+    A[2] = 3
+    A[3] = 4
+    A[4] = 3
+    A[5] = 4
+    A[6] = 1
+    A[7] = 2
+    A[8] = 3
+    A[9] = 4
+    A[10] = 6
+    A[11] = 2
+the function should return 3, as explained above.
+
+Write an efficient algorithm for the following assumptions:
+
+N is an integer within the range [1..100,000];
+each element of array A is an integer within the range [0..1,000,000,000].
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <p>배열 A를 입력파라미터로 받았을 경우 각각의 블럭은 균일한 길이로 나누어 떨어져야 한다. 또한 , 균일한 길이로 나누어 떨어진 블럭마다 peek을 
+가지고 있어야 한다. 결국 , 배열 A의 길이가 N일 경우 균일한 길이를 구하기 위해서는 나누어 떨어져야한다. 즉 N의 약수가 블럭의 수가 된다.
+각각의 블럭마다 peek을 보유하고 있는지 체크 해야한다.peek의 보유 여부를 판단하기 위해서 binaarySearch를 응용했다. 
+픽이 존재할 경우 true를 반환하고 없을 경우 false를 반환한다. false가 반환되었을 경우 , 다음 원소를 탐색한다.</p>
+  </li>
+</ol>
+
+<p>아래의 방법으로 해결할 경우 시간 복잡도는 다음과 같다 . O(N * log(log(N)))</p>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	static class Solution
+	{		
+		/*
+		 * O(N * log(log(N)))
+		 */
+			public int solution(int A[])
+			{
+				int size = A.length;
+				int result = Integer.MIN_VALUE;
+				boolean[] checkBoard = new boolean[size];
+				/*
+				 * 조건 1
+				 * P[N-1] &lt; P[N] &gt; P[N+1]
+				 */
+				for(int idx=1; idx&lt;size-1; idx++)
+				{
+					if(A[idx-1] &lt; A[idx] &amp;&amp; A[idx] &gt; A[idx+1])
+					{
+						checkBoard[idx]=true;
+					}
+					
+				}
+				
+				/*
+				 * 균등하게 나눌수 있는 리스트
+				 * 균등하게 나누어 떨어진다. -&gt; 약수
+				 */
+				Iterator&lt;Integer&gt; componentList = componentList(size);
+				
+				while(componentList.hasNext())
+				{
+					Integer numOfBlock  = componentList.next(); //블록의 원소의 수
+					boolean checker = true;
+					Integer tmp =0;
+					Integer numOfElements = size/numOfBlock;
+					Integer end = numOfElements; //전체 원소의 수
+					Integer start = 1 ;
+					checker =true;
+					while(0&lt;numOfBlock)
+					{
+						if(!bsearch(checkBoard,start-1,end-1))
+						{
+							checker=false;
+							tmp=0;
+							break;
+						}
+						start+=numOfElements;
+						end+=numOfElements;
+						numOfBlock--;
+						if(checker)
+						{
+							tmp = size/numOfElements;
+							//break;
+						}
+					}
+					if(result  &lt;= tmp)
+					{
+						result =tmp;
+					}
+					
+				}
+				
+				
+				return result;
+				
+			}
+			
+			private boolean bsearch(boolean[] args,int start,int end)
+			{
+				if(start &gt;=end)
+					return args[end];
+				else
+				{
+					int mid = (start+end)/2;
+					if(args[mid])
+						return true;
+					else
+					{
+						return bsearch(args,start,mid) || bsearch(args,mid+1,end);
+					}
+				}
+							
+				
+			}
+			
+			
+			private Iterator&lt;Integer&gt; componentList(int N)
+			{
+				//5621892
+				//780291637(소수)
+				//MAX_INT (소수)
+				/* 
+				 * O(sqrt(N))
+				 * 해당 로직의 문제는   소수일 경우 혹은 나눠 떨어지는 숫자들의 텀이 클 수록 O(N)이 증가함
+				 * worst case = 0(N)
+				 * 
+				 * 
+				 */
+				Map&lt;Integer,Integer&gt; hMap = new HashMap&lt;Integer,Integer&gt;();
+				
+				for(int idx=1; idx&lt;=N/idx ;idx++)
+				{
+					if(idx &lt;=0)
+					{
+						break;
+					}
+					if(!hMap.containsKey(idx))
+					{
+						if(N%idx == 0)		
+						{
+							
+							hMap.put(idx, N/idx);
+							hMap.put(N/idx,idx);
+						//	N/=idx;
+						}
+						else
+						{
+							continue;
+						}
+					}
+					else
+					{
+						if(idx &gt;=hMap.get(N/idx))
+						{
+							break;
+						}
+					}
+					
+				}
+				
+				return hMap.keySet().iterator();
+			}
+			
+	}
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2019/02/13/Peeks.html';
+  this.page.identifier = '/algo/2019/02/13/Peeks';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/05/01/ChocolatesByNumbers.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 05 / 01</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 12
+
+  
+    문제
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2019/02/13/MinPerimeterRectangle.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 02 / 13</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 10 문제 MinPerimeterRectangle : An integer N is...</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

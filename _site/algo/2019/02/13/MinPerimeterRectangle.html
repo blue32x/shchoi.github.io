@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2019 / 02 / 13</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-10">코딜리티 Lesson 10</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+    <p>MinPerimeterRectangle  : An integer N is given, representing the area of some rectangle.</p>
+  </li>
+</ol>
+
+<p>The area of a rectangle whose sides are of length A and B is A * B, and the perimeter is 2 * (A + B).</p>
+
+<p>The goal is to find the minimal perimeter of any rectangle whose area equals N. The sides of this rectangle should be only integers.</p>
+
+<p>For example, given integer N = 30, rectangles of area 30 are:</p>
+
+<p>(1, 30), with a perimeter of 62,</p>
+
+<p>(2, 15), with a perimeter of 34,</p>
+
+<p>(3, 10), with a perimeter of 26,</p>
+
+<p>(5, 6), with a perimeter of 22…….</p>
+
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <p>2019-02-11에 포스트했던 CounterFactors의 연장 문제이다 . 문제에서 하고 싶은 말은 약수의 짝 중에서 2*(A+B)가 가장 작은 값을 구해라!</p>
+  </li>
+</ol>
+
+<p>1번의 문제에서 변한 로직은  최솟값을 구하는 로직이 추가되고 메쏘드의 반환값으로 hashMap의 크기가 아닌 최솟값을 반환한다.</p>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	int solution(int N)
+		{
+			//5621892
+			//780291637(소수)
+			//MAX_INT (소수)
+			/* 
+			 * O(sqrt(N))
+			 * 해당 로직의 문제는   소수일 경우 혹은 나눠 떨어지는 숫자들의 텀이 클 수록 O(N)이 증가함
+			 * worst case = 0(N)
+			 * 
+			 * 
+			 */
+			Map&lt;Integer,Integer&gt; hMap = new HashMap&lt;Integer,Integer&gt;();
+			int minVal= Integer.MAX_VALUE;
+			for(int idx=1; idx&lt;=N/idx ;idx++)
+			{
+				if(idx &lt;=0)
+				{
+					break;
+				}
+				if(!hMap.containsKey(idx))
+				{
+					if(N%idx == 0)		
+					{
+						
+						hMap.put(idx, N/idx);
+						//System.out.println("Set : "+idx+" "+N/idx);
+						if(minVal &gt;= 2* (idx +N/idx))
+						{
+							minVal = 2* (idx +N/idx);
+						}
+						
+						
+						hMap.put(N/idx,idx);
+					//	N/=idx;
+					}
+					else
+					{
+						continue;
+					}
+				}
+				else
+				{
+					if(idx &gt;=hMap.get(N/idx))
+					{
+						break;
+					}
+				}
+					
+			}
+			
+			return minVal;
+		}
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2019/02/13/MinPerimeterRectangle.html';
+  this.page.identifier = '/algo/2019/02/13/MinPerimeterRectangle';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/02/13/Peeks.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 02 / 13</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 10
+
+  
+    문제
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2019/02/11/CounterFactors.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 02 / 11</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 10 문제 Counter Factors : 효율적으로 약수의 갯...</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

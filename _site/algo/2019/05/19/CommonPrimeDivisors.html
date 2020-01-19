@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2019 / 05 / 19</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-12">코딜리티 Lesson 12</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A prime is a positive integer X that has exactly two distinct divisors: 1 and X. The first few prime integers are 2, 3, 5, 7, 11 and 13.
+
+A prime D is called a prime divisor of a positive integer P if there exists a positive integer K such that D * K = P. For example, 2 and 5 are prime divisors of 20.
+
+You are given two positive integers N and M. The goal is to check whether the sets of prime divisors of integers N and M are exactly the same.
+
+</code></pre></div></div>
+<p><a href="https://app.codility.com/demo/results/trainingFS6JHJ-B6Z/">풀이&amp;문제</a></p>
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>N개의 초콜릿이 있다. 처음 먹는 초콜릿은 0번째이며, 다음 순서는 (0+M)%N번째 초콜릿을 먹는다. (이부분을 잘못 생각했다 그냥 현재에서 n번째 초콜릿이다.) 
+이미 먹어버린 초콜릿이 최초로 발견되는 순간까지 먹은 초콜릿의 수는 몇개 인가?
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<ul>
+  <li>아래 주석이 인코딩 오류가 발생해서 볼수 없기 때문에 남김</li>
+  <li>sol1 : 최대 공약수를 구하고  최대공약수의 소수인 약수를 Map에 저장한 뒤 처리하려고 함  문제점은 소수를 판별하기 위해 에라토스테네스의 체를 사용하려고 하면 제약 조건 때문에
+메모리 오버플로 발생</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. array 정의 : array를 정의하여 체크보드를 만들었을 경우  heap memory 오류가 발생
+2. map 정의 후 : 반복문으로 작성한 로직은 정상 작동하였으나 시간복잡도 O(N+M)으로 타임아웃
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>sol2 : 두 수의 최대 공약수를 구하고  각 수와 두수의 최대공약수의 최대공약수를 구해나간다.?  사실 잘 이해가 안됨. 풀이 참고하자
+내가 여기서 건진 것은 유클리드 호제법의 사용법 이었다….</p>
+  </li>
+  <li>
+    <p><a href="https://mkki.github.io/codility/2018/05/31/codility-common-prime-divisors.html">풀이참고</a></p>
+  </li>
+</ul>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2019/05/19/CommonPrimeDivisors.html';
+  this.page.identifier = '/algo/2019/05/19/CommonPrimeDivisors';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/05/26/Ladder.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 05 / 26</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 12
+
+  
+    문제
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2019/05/01/ChocolatesByNumbers.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 05 / 01</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 12
+
+  
+    문제
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

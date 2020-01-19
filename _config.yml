@@ -12,32 +12,83 @@
 # These are used to personalize your new site. If you look in the HTML files,
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@example.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+# in the templatjes via {{ site.myvariable }}.
+
+title: SelfMaker
+email: blue32x@naver.com
+description: Don't be lazy
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "shchoi5480.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#twitter_username: jekyllrb
+github_username:  blue32x
+
+#avatar
+avatar: /assets/img/me.jpg
+
+pagination:
+  enabled: true
+  per_page: 5
+  # limit: 0
+  sort_field: "date"
+  sort_reverse: true
+  #permalink: '/page/:num/'
+
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-minimal
+kramdown:
+  input: GFM
+  syntax_hightlighter: rouge
+  hard_wrap: false
+# theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-paginate-v2
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+
+# default variables for post-type page
+defaults:
+  -
+    scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comment: true
+
+
+# sass
+# ============================================================================
+sass:
+  sass_dir: _sass
+  style: compressed
+
+
+# exclude none site related files
+# ============================================================================
+exclude:
+  - README.md
+  - LICENSE
+  - github
+  - package.json
+  - package-lock.json
+  - node_modules
+
+
+# google analytics
+# ============================================================================
+# turn it off -> ga: false
+ga: false
+
+
+# disqus
+# ============================================================================
+# turn it off for all posts -> disqus: false
+# turn it off for a particular post -> add `comment: false` to post front matter
+disqus: kkninjae
+
+#travis
+deploy:
+  type: git
+  repo: https://__GITHUB_TOKEN__@github.com/kdevkr/kdevkr.github.io.git
+  branch: master

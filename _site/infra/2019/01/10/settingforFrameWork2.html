@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>환경셋팅(2)</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">환경셋팅(2)</h1>
+    
+
+    
+    <div class="card__date">2019 / 01 / 10</div>
+    
+
+    <div class="article__content"><h2 id="환경셋팅2">환경셋팅(2)</h2>
+<ol>
+  <li>
+    <h2 id="설치-구성">설치 구성</h2>
+    <ul>
+      <li>Virtual Box</li>
+      <li>Centos7</li>
+      <li>framework</li>
+      <li>aws로 기동 중인 oracle server</li>
+      <li>tomcat7</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="2설치-내용">2.설치 내용</h2>
+<ul>
+  <li>java 1.8.0 설치 및 경로</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1. 설치 명령어
+ user$ yum install java-1.8.0-openjdk-devel.x86_64
+ 2. 설치된 경로
+ user$ ls /usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+</code></pre></div></div>
+
+<ul>
+  <li>tomcat 7 설치 및 셋팅</li>
+  <li>설치주소 <a href="https://tomcat.apache.org/download-70.cgi">tomcat7</a></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 2019-01-09에 포스팅한 공유폴더를 통해 가상화한 linux에 설치파일 전달.
+2. 제공받은 메뉴얼에 따라 특정위치에서 압축해체
+3. tomcat7_admin , tomcat7_online 각각의 역할 마다 서버생성
+</code></pre></div></div>
+<ul>
+  <li>tomcat 7 new info</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. JNDI란?Java Naming and Directory Interface 이며 아래  JNDI정보 를 참조
+
+  1.이점 : 유지보수 용이, 로드밸런싱용이, 다수의 datasource 공유 가능,
+  
+  
+2. Server.xml,Context.xml 차이
+  
+  1.Server.xml	: Was에서 공통으로 사용하는 설정 
+  
+  2.Context.xml : 서버 위에서 구동되는  application을 위한 설정
+  
+  3.server.xml에 reource 등록 후 context.xml에서 resource link로 참조 가능
+  
+3. globalResource 설정
+</code></pre></div></div>
+
+<h2 id="2참조">2.참조</h2>
+
+<p>#1 JNDI정보
+<a href="http://blog.naver.com/PostView.nhn?blogId=parkkcy&amp;logNo=20128228201">http://blog.naver.com/PostView.nhn?blogId=parkkcy&amp;logNo=20128228201</a></p>
+
+<p>#2 server.xml 자원등록
+<a href="https://github.com/Wonjune/DatasourceServlet/wiki/3.-Tomcat-%EC%84%9C%EB%B2%84%EC%9D%98-DataSource-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">설정 참고자료</a></p>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/infra/2019/01/10/settingforFrameWork2.html';
+  this.page.identifier = '/infra/2019/01/10/settingforFrameWork2';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/01/11/pushdockerhub.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 01 / 11</div>
+
+    
+    
+    <div class="card__excerpt">Container to image ``` docker commit [container name] [targer image...</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/infra/2019/01/09/settingforFrameWork01.html">
+  <div class="card">
+
+    <h1 class="card__title">환경셋팅(1)</h1>
+
+    <div class="card__date">2019 / 01 / 09</div>
+
+    
+    
+    <div class="card__excerpt">환경셋팅(1)
+
+  
+    설치 구성
+    
+      Virtual Box
+      Centos7
+    
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

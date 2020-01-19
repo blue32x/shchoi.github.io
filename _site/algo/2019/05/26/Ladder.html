@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2019 / 05 / 26</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-12">코딜리티 Lesson 12</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You have to climb up a ladder. The ladder has exactly N rungs, numbered from 1 to N. With each step, you can ascend by one or two rungs. More precisely:
+
+with your first step you can stand on rung 1 or 2,
+if you are on rung K, you can move to rungs K + 1 or K + 2,
+finally you have to stand on rung N.
+Your task is to count the number of different ways of climbing to the top of the ladder.
+
+For example, given N = 4, you have five different ways of climbing, ascending by:
+
+1, 1, 1 and 1 rung,
+1, 1 and 2 rungs,
+1, 2 and 1 rung,
+2, 1 and 1 rungs, and
+2 and 2 rungs.
+Given N = 5, you have eight different ways of climbing, ascending by:
+
+1, 1, 1, 1 and 1 rung,
+1, 1, 1 and 2 rungs,
+1, 1, 2 and 1 rung,
+1, 2, 1 and 1 rung,
+1, 2 and 2 rungs,
+2, 1, 1 and 1 rungs,
+2, 1 and 2 rungs, and
+2, 2 and 1 rung.
+The number of different ways can be very large, so it is sufficient to return the result modulo 2P, for a given integer P.
+
+Write a function:
+
+class Solution { public int[] solution(int[] A, int[] B); }
+
+that, given two non-empty arrays A and B of L integers, returns an array consisting of L integers specifying the consecutive answers; position I should contain the number of different ways of climbing the ladder with A[I] rungs modulo 2B[I].
+
+For example, given L = 5 and:
+
+    A[0] = 4   B[0] = 3
+    A[1] = 4   B[1] = 2
+    A[2] = 5   B[2] = 4
+    A[3] = 5   B[3] = 3
+    A[4] = 1   B[4] = 1
+the function should return the sequence [5, 1, 8, 0, 1], as explained above.
+
+Write an efficient algorithm for the following assumptions:
+
+L is an integer within the range [1..50,000];
+each element of array A is an integer within the range [1..L];
+each element of array B is an integer within the range [1..30].
+Copyright 2009–2019 by Codility Limited. All Rights Reserved. Unauthorized copying, publication or disclosure prohibited.
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <p>길이가 N인 사다리를 올라가는데 한번에 올라갈 수  수는 1 또는 2이다. 이 때 N까지 도달하는 방법의 수를 반환한다. 반환 값은  2의 K승을 한 수를 모듈러 연산한다.</p>
+  </li>
+</ol>
+
+<p>try1 : back-tracking으로  최종 목적지인 N번째에서 N-1,N-2를 재귀 호출한다. 이떄 발생하는 문제는 크기가 큰 수는 반복 호출 때문에 stackOverflow와 timeout 발생함.
+       모듈러 연산 시  java Math class의 pow를 사용하려고 함. try2에서 발견했지만 제대로된 모듈러 연산된 값을 반환받지 못했다.</p>
+
+<p>try2 : 재귀 호출 시 timeout을 제거하기 위해서 memoization 방법을 사용. 반복문 시작 시  길이가 A[n]인 배열을 생성 후 재귀호출 시 n 번째까지 도달하는 방법의 수를 저장함
+       timeout은 해결했지만 특정 케이스에서 제대로 모듈러 연산한 값을 받지 못하는 것을 인지. 구글링 해보니 비트연산자 사용하면 될 것 같아서 다음과 같은 비트 연산자를 사용</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private int _getModularResult(long result,int b)
+	{
+		// i &amp; (2의 n제곱 - 1) i%2^b
+	
+		return (int)(result &amp; ((2&lt;&lt;(b-1))-1));
+	}
+</code></pre></div></div>
+
+<p>try3 : 위의 방식으로  N이 max인 케이스를 제외하고 통과함. n이 max일 경우  재귀 호출 시 stack에 계속 값이 쌓여서 stackoverflow가 발생한다. 해결방법은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. for문으로 변경   --&gt; O(n)해결
+2. tail recursion 사용 : 재귀 호출시 사용했던 stack 주소르르 재사용하여 stackoverflow방지하는 개념 (실사용은 못했음)
+</code></pre></div></div>
+
+<p><a href="https://app.codility.com/demo/results/training6KZ595-WC3/">참고</a></p>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	class Solution
+{
+	
+	 private long[] check ;
+	
+	/*
+	 * A[i]의 사다리 수에 대해서   올라가는 방법은 N 가지 나올 수 있다. 
+	 * N의 값이 클 수 있기 때문에  반환하는 값은
+	 * N%2^B[i]를 반환한다. 
+	 */
+	public int[] solution(int[] A, int[] B)
+	{
+		int[] results = new int[A.length];
+		int[] copyA = A.clone();
+		Arrays.sort(copyA);
+		int max = copyA[A.length-1];
+		check = new long[max+2]; //a+1의 크기만큼의 보드를 만든다. 
+		check[1]=1;
+		check[2]=2;
+
+		for(int i=3; i&lt;=max; i++)
+		{
+			check[i]=check[i-1]+check[i-2];
+		}
+		//_getAscendingCntforDynamic(max);			
+
+		for(int i=0; i&lt;A.length; i++)
+		{
+			int a = A[i];
+			int b = B[i];
+			
+			//Double cnt = _getAscendingCnt(a);
+			//_getAscendingCntforDynamic(a,0);
+		
+			
+			results[i] =_getModularResult(check[a],b);
+			System.out.println(results[i]);
+		}
+		_print(results);
+		return results;
+	}
+	/*
+	 * sol1 . 점화식에 의한 단순 계산법 back-tracking
+	 * 
+	 *     K(n)		=	K(n-1) + 1 or K(n-2) + 2  n &lt; N
+	 *                  1			 			  n = N
+	 * sol2 . 동적계획법 배열에 저장
+	 */
+	private Double _getAscendingCnt(int N)
+	{
+		if(N == 0)
+		{
+			return new Double(1);
+		}
+		else if(N &gt; 0)
+		{
+			
+			return _getAscendingCnt(N-2) +_getAscendingCnt(N-1);
+			
+		}
+		else
+		{
+			return new Double(0);
+		}
+	}
+	
+	private long _getAscendingCntforDynamic(int N)
+	{	
+		if(N==0)
+		{
+			return 1;
+		}
+		if( N &lt;0)
+		{
+			return 0;
+		}
+		if(check[N] &gt; 0)
+		{
+			//System.out.println("Vist : "+check[N]);
+			return check[N];
+			
+		}
+		else
+		{
+			/*
+			 * tail recursion
+			 */
+			return check[N] = _getAscendingCntforDynamic(N-2)+_getAscendingCntforDynamic(N-1);
+			//return _getAscendingCntforDynamicTail(N, _getAscendingCntforDynamic(N-2),_getAscendingCntforDynamic(N-1))
+		}
+	}
+	
+
+	
+	private int _getModularResult(long result,int b)
+	{
+		// i &amp; (2의 n제곱 - 1) i%2^b
+	
+		return (int)(result &amp; ((2&lt;&lt;(b-1))-1));
+	}
+	private void _print(int[] a)
+	{
+		for(int i=0; i&lt;a.length; i++)
+		{
+			System.out.println(a[i]);
+		}
+	}
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2019/05/26/Ladder.html';
+  this.page.identifier = '/algo/2019/05/26/Ladder';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2019/05/19/CommonPrimeDivisors.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 05 / 19</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 12
+
+  
+    문제
+  
+
+
+</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

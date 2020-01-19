@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2018 / 07 / 22</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-1">코딜리티 Lesson 1</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+    <ul>
+      <li>A binary gap within a positive integer N is any maximal sequence of consecutive zeros that is surrounded by ones at both ends in the   binary representation of N.</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>For example, number 9 has binary representation 1001 and contains a binary gap of length 2.</li>
+  <li>The number 529 has binary representation 1000010001 and contains two binary gaps: one of length 4 and one of length 3.</li>
+  <li>The number 20 has binary representation 10100 and contains one binary gap of length 1.</li>
+  <li>The number 15 has binary representation 1111 and has no binary gaps. The number 32 has binary representation 100000 and has no binary   gaps.</li>
+</ul>
+
+<ol>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <ul>
+      <li>10진수로 주어진 입력 N을  2진수로 변환 하였을 경우 위 문제에서 예로 사용한 529를 다시 예로 들어보면 1000010001로 변환 된다.</li>
+      <li>이 때 1 사이의 0의 갯수가 4개, 3개인 케이스가 발생하는데, 0의 갯수가 가장 많은 케이스를 반환해주는 메쏘드를 작성하면 된다.</li>
+      <li>주의할 점은 1사이의 0의 갯수만 해당된다는 것이다. 10000과 같은 경우는 해당되지 않는다.</li>
+      <li>아래 문제해결 부분을 보면 알겠지만 문제를 접했을 당 시에는 10진수를 2로 나누면서  2로 나눴을 때 나머지가 1인경우에 플래그를 세우고 그 사이의</li>
+      <li>0의 갯수를 세다가 다시 나머지가 1인 경우가 발생했을 때 플래그를 닫고 그 때까지의 0의 갯수를 임시로 저장해두는 방식으로 로직을 작성하였다.</li>
+      <li>현재 다시 생각해보니 비트연산자를 이용했어야 더 간결하고 올바른 풀이가 되지 않았을까 싶다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>3.문제해결</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>static int solution(int N) {
+		int val = 0;
+		boolean flag = false;
+		boolean end  = false;
+		int tmp=0;
+		while(N!= 1)
+		{
+			if(N%2==1 &amp;&amp; flag == false)
+			{
+				flag=true;
+			}
+			else if (N%2==0 &amp;&amp; flag ==true)
+			{
+				val++;
+			}
+			else if((N/2!=1 &amp;&amp;(N%2==1))  &amp;&amp; flag == true )
+			{
+				tmp=val;
+				if(tmp != 0)
+				  val=0;
+			}
+			else if(N%2==1 &amp;&amp; flag == true)
+			{
+				if(tmp &lt;val)
+				{
+					tmp=val;
+				}
+				flag=false;
+			}
+			
+			N/=2;
+		}
+		if(tmp &lt;val)
+		{
+			tmp=val;
+		}
+		
+		
+		return tmp;
+	}
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2018/07/22/BinaryGap.html';
+  this.page.identifier = '/algo/2018/07/22/BinaryGap';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2018/07/23/CyclicRotation.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2018 / 07 / 23</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 2 문제 An array A consisting of N...</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

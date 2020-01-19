@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>코딜리티</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<link rel="icon" type="image/x-icon" href="" />
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i" rel="stylesheet">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="SelfMaker" href="/feed.xml" />
+
+
+
+
+  <link rel="stylesheet" href="/assets/css/page.css" media="all">
+
+</head>
+<body>
+
+  <div class="page-content clear-header--top clear-navbar--top clear-footer--bottom">
+
+    <header class="header">
+  <a class="header__avatar header__avatar--circle" href="/">
+    <img src="/assets/img/me.jpg" alt="">
+  </a>
+</header>
+
+
+    <nav class="navbar">
+  <ul>
+    <li class="navbar__item"><a href="/about/">aboutme</a></li>
+    <li class="navbar__item"><a href="/infra/index.html">infra</a></li>
+    <li class="navbar__item"><a href="/algo/index.html">algorithm</a></li>
+    <!--<li class="navbar__item"><a href="https://github.com/kkninjae/book/archive/master.zip">Download</a></li> -->
+  </ul>
+</nav>
+
+
+    <main class="main clear-header--left">
+
+    <div class="post">
+
+  <div class="card">
+
+    
+    <h1 class="card__title article_title">코딜리티</h1>
+    
+
+    
+    <div class="card__date">2019 / 02 / 11</div>
+    
+
+    <div class="article__content"><h2 id="코딜리티-lesson-10">코딜리티 Lesson 10</h2>
+<ol>
+  <li>
+    <h2 id="문제">문제</h2>
+    <p>Counter Factors  : 효율적으로 약수의 갯 수 를 구하라……</p>
+  </li>
+  <li>
+    <h2 id="문제해석">문제해석</h2>
+    <p>주어진 입력 파라미터 N을 구성하는 약수의 갯수를 구하라.약수는  양수 D로 N을 나눴을 경우 나머지가 0이라면   (D,N/D)의 쌍으로 이뤄진다.</p>
+  </li>
+</ol>
+
+<p>HashMap을 통해서 약수의 쌍을 관리하고 반복문의 인덱스 D가  기적재되어있는 N/D보다 커지면 반복문을 탈출한다. 여기서 시간복잡도가 O(N)보다 작다.</p>
+
+<p>특수한 경우  MAX_INT, 780291637,5621892 와 같은 경우  D 와 N/D를 비교하기 위해서는 결국 N번 모두 순회하여야 하므로 시간복잡도가 O(N)에 가까워진다.</p>
+
+<p>이 문제를 해결하기 위해서 순회하는 범위를 D만큼 나눠서 순회하도록 로직을 구현했다.</p>
+
+<h2 id="3문제해결">3.문제해결</h2>
+<p>시간복잡도 O(sqrt(N))</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	int solution(int N)
+		{
+			//5621892
+			//780291637(소수)
+			//MAX_INT (소수)
+			/* 
+			 * O(sqrt(N))
+			 * 해당 로직의 문제는   소수일 경우 혹은 나눠 떨어지는 숫자들의 텀이 클 수록 O(N)이 증가함
+			 * worst case = 0(N)
+			 * 
+			 * 
+			 */
+			Map&lt;Integer,Integer&gt; hMap = new HashMap&lt;Integer,Integer&gt;();
+			
+			for(int idx=1; idx&lt;=N/idx ;idx++)
+			{
+				if(idx &lt;=0)
+				{
+					break;
+				}
+				if(!hMap.containsKey(idx))
+				{
+					if(N%idx == 0)		
+					{
+						
+						hMap.put(idx, N/idx);
+						System.out.println("Set : "+idx+" "+N/idx);
+						hMap.put(N/idx,idx);
+					//	N/=idx;
+					}
+					else
+					{
+						continue;
+					}
+				}
+				else
+				{
+					if(idx &gt;=hMap.get(N/idx))
+					{
+						break;
+					}
+				}
+				
+			}
+			
+			return hMap.size();
+		}
+</code></pre></div></div>
+</div>
+
+  </div>
+
+
+  <div class="post__comment">
+    
+    <div class="post__comment--on">
+      
+      
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = '/algo/2019/02/11/CounterFactors.html';
+  this.page.identifier = '/algo/2019/02/11/CounterFactors';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://kkninjae.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+    
+  </div>
+
+
+  <div class="post__pagination">
+    <ul>
+      
+      <li>
+
+
+<a href="/algo/2019/02/13/MinPerimeterRectangle.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 02 / 13</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 10 문제 MinPerimeterRectangle : An integer N is...</div>
+
+  </div>
+</a>
+</li>
+      
+
+      
+      <li>
+
+
+<a href="/algo/2019/01/21/RamenFactory.html">
+  <div class="card">
+
+    <h1 class="card__title">코딜리티</h1>
+
+    <div class="card__date">2019 / 01 / 21</div>
+
+    
+    
+    <div class="card__excerpt">코딜리티 Lesson 2 문제 라면 공장에서는 하루에 밀가루를 1톤씩 사용합니다....</div>
+
+  </div>
+</a>
+</li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
+    </main>
+
+    <footer class="footer clear-header--left">
+  <div class="footer__note">&copy; 2017 Book</div>
+  <div class="footer__note">Built with <a href="https://github.com/kkninjae/book" target="_blank">Book</a>, a <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> theme. <a href="/feed.xml" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>
