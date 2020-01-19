@@ -43,6 +43,7 @@ $ bundle exec jekyll serve #Gemfile.lock에 명시된 버전의 루비젬으로 
 - jekyll pagenate v2 적용
 
 gemFile 의존성 추가
+
 ```
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
@@ -50,6 +51,7 @@ group :jekyll_plugins do
 end
 ```
 _config.yml 수정
+
 ```
 #jekyll paginate v2 설정 추가
 pagination:
@@ -66,11 +68,13 @@ plugins:
 ```
 
 위의 과정까지 진행 후 push를 하게 되면 theme는 적용이 되나 포스팅한 게시물이 안나옴
+
 ```
 jekyll-pagenate-v2 github에서 githubpage에서 공식적으로 support하고 있지 않는다고 되어있다.
 ```
 
 - travis 연동
+
 ```
 jekyll-pagenate-v2가 githubpage에서 support가 되지 않기 때문에 build가 제대로 되지 않는다.
 jekyll-pagenate-v2를 어떻게 적용할 수 있을까 찾아보다가 travis를 통해서 해결한 케이스를 발견
