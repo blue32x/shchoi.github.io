@@ -23,7 +23,7 @@ group :jekyll_plugins do
   gem "jekyll-paginate-v2", "~> 1.7"
 end
 
-gem "rake" , "">= 0.9.2"
+gem "rake" , ">= 0.9.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
