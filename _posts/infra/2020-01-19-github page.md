@@ -84,4 +84,5 @@ repo1(깃허브 페이지의 _site를 얻기위한 레포지토리) 빌드 -> �
 - 참조
     - [지킬가이드](http://jekyllrb-ko.github.io/docs/home/)
     - [지킬테마](http://jekyllthemes.org/)
+    - [travis](https://travis-ci.com/)
     - [pagenate를 적용하기 위한 travis 연동](https://shlrur.github.io/develog/2019/01/01/jekyll-template-story-3/)
