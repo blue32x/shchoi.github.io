@@ -37,15 +37,20 @@ fun main(args : Array<String>){
 그리고 출력 시 앞에서 정의한 name을 사용하는 방식이 달라졌다. 
 
 1. 변수 선언
+
 ```
 val -> value : null type이 불가능 
 var -> variable : null type 허용
 ```
+
 2. main method 위치
+
 ```
 *.kt 파일의 top level에 main function을 작성 할 수 있다. 
 ```
+
 3. method 정의 방법
+
 ```
 method의 return type을 명시 하던 위치에 fun이라는 keyword가 들어감
 입력파라미터도  type variabaleName과 같은 형식이 아닌 variableName:type 과 같은 형식으로 바뀜
@@ -54,9 +59,13 @@ method의 return type을 명시 하던 위치에 fun이라는 keyword가 들어�
  자바 :   [returnType] [methodName](variableType [variableName])
                                 ↓
  코틀린 :  fun [methodName]([variableName]:variableType):[returnType]
+
 ```
-4. 변수 사용방법. 
+
+4. 변수 사용방법.
+ 
 ```
 String 내부에서 사용하고자 하는 변수 앞에 $를 함꼐 붙여 주면 스트링 안해서도 변수를 사용할 수 있음
 
 ```
+
