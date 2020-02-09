@@ -56,7 +56,7 @@ method의 return type을 명시 하던 위치에 fun이라는 keyword가 들어�
 입력파라미터도  type variabaleName과 같은 형식이 아닌 variableName:type 과 같은 형식으로 바뀜
 
 
- 자바 :   [returnType] [methodName](variableType [variableName])
+ 자바 :   [returnType] [methodName] (variableType [variableName])
                                 ↓
  코틀린 :  fun [methodName]([variableName]:variableType):[returnType]
 
@@ -65,7 +65,7 @@ method의 return type을 명시 하던 위치에 fun이라는 keyword가 들어�
 4. 변수 사용방법.
  
 ```
-String 내부에서 사용하고자 하는 변수 앞에 $를 함꼐 붙여 주면 스트링 안해서도 변수를 사용할 수 있음
+String 내부에서 사용하고자 하는 변수 앞에 $를 함꼐 붙여 주면 스트링 내부에서 변수를 사용할 수 있음
 
 ```
 
