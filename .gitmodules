@@ -2,7 +2,3 @@
 	path = blue32x
 	url = https://github.com/blue32x/blue32x.github.io
 	branch = master
-[submodule "blue32x.github.io"]
-	path = blue32x.github.io
-	url = https://github.com/blue32x/blue32x.github.io
-	branch = master
