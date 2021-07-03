@@ -17,7 +17,7 @@ script: bundle exec rake site:deploy --quiet #--trace
 
 env:
   global:
-    #20210703 secure git token
+    #20210703 add secure git token
     # travis encrypt GITHUB_TOKEN="ssss" -add
     secure: "xvKv4/PamLydNiQXjQdgEFH0n+Imj9Oj1fPm2hnWsAnzYLKF4zN5sNoUYLzFG087xM86ER1hwzSLLcLELmGd95hYnWvSmh67u1EqEKl9BlhhZB9vygkcS7cI21M2oCeMf2Uu4qanTPlo12KJqZUAj7nrZoUJdz9JcoM5rXMXizOcFPchi4cNGeJkj+kzG7oH7zPeFLdTPWUnnwRsERUS+bpqd2rhx0xi+vefX1QHDP+O9ReRGHK9e9XVSPKhFjIJjgeUcoZUfbc67i/hz6P0WtU0Y97uEuFAK34tr5OqYTQe68xLYAvM12KrmxkLMqH4dIfE3M61NCm1pCcx7c3vXfElg0SnhVLzogqg3XDtCJQVhu6UMuN53D+Cm8az85AqLaYIrO1H3zVDKQbK+X+cm8xj9JXHzdnLSfaoLTU5HyIwc7JX50kFejLWjVwSmhV27VA+4H16H9oP1AZaj/YlFFzsyFkGyU3jH17XMcZiSuUOLjb2tJeHnJ6dUQHfwpBToPow+3w4D8xTYeBOjoBYe6jxgCRIhan05/QrdiKhwHDmpCltdySjdZdrYlZlhx2p5GuAfD5PhsoZZFr7MoQHP206fL5tqA7Odyrz3l5BtA3JAABz7xSsUnITBtjW8CI2PNn35kpGBmWQoeJSZAj/dAFVvONOJxZjvAv00QomTBs="
 
