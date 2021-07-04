@@ -1,28 +1,17 @@
-# .travis.yml
 sudo: false
 language: ruby
 cache: bundler
 rvm:
   - 2.4.2
-
 install:
-  # Install Jekyll and dependencies
   - bundle install
-
 before_script:
-  - git config --global user.email "blue32x@naver.com"
+  - git config --global user.email "shchoi5480@gmail.com"
   - git config --global user.name "blue32x"
-
-script: bundle exec rake site:deploy --quiet #--trace
-
+script: bundle exec rake site:deploy --quiet
 env:
   global:
-    #20210703 add secure git token
-    # travis encrypt GITHUB_TOKEN="ssss" -add
-    secure: "xvKv4/PamLydNiQXjQdgEFH0n+Imj9Oj1fPm2hnWsAnzYLKF4zN5sNoUYLzFG087xM86ER1hwzSLLcLELmGd95hYnWvSmh67u1EqEKl9BlhhZB9vygkcS7cI21M2oCeMf2Uu4qanTPlo12KJqZUAj7nrZoUJdz9JcoM5rXMXizOcFPchi4cNGeJkj+kzG7oH7zPeFLdTPWUnnwRsERUS+bpqd2rhx0xi+vefX1QHDP+O9ReRGHK9e9XVSPKhFjIJjgeUcoZUfbc67i/hz6P0WtU0Y97uEuFAK34tr5OqYTQe68xLYAvM12KrmxkLMqH4dIfE3M61NCm1pCcx7c3vXfElg0SnhVLzogqg3XDtCJQVhu6UMuN53D+Cm8az85AqLaYIrO1H3zVDKQbK+X+cm8xj9JXHzdnLSfaoLTU5HyIwc7JX50kFejLWjVwSmhV27VA+4H16H9oP1AZaj/YlFFzsyFkGyU3jH17XMcZiSuUOLjb2tJeHnJ6dUQHfwpBToPow+3w4D8xTYeBOjoBYe6jxgCRIhan05/QrdiKhwHDmpCltdySjdZdrYlZlhx2p5GuAfD5PhsoZZFr7MoQHP206fL5tqA7Odyrz3l5BtA3JAABz7xSsUnITBtjW8CI2PNn35kpGBmWQoeJSZAj/dAFVvONOJxZjvAv00QomTBs="
-
-
-
+    secure: yPqFPHeUC9y/bFPn/kyBs+dd8+DKOyycKoGfN1xpiABzUcG2C1f7OoHTqbg2z+K/3WllZajDenvL6gK8P0DAe9gjH9vUQAd3P3UKHFBhFFtcMUMfIYJCLc583CpLb8zAvdbeY7Dow/VpqYyWiegHvQ+FmQHhms1mkwzRYqbYtuQaKePrWTXxN0IjT7YrzWP4aodkjhILAJ3ozWUN01DqVbmPfhJkYtl9GJ2nrurOIk3Z7zj6xbZx57CxuqWMNlFcUBXIOHti2FyjnJRmm3Ay0z+PvB/g2ZSB/SowAUg9eBxtKQWHw4R4R9+3UnO/EYF9GBcSHbygZu3osOSQ1JmA7iD+Tu99S2xujLbANpntaPxt6SF9CFGPW36poLTs1HwTjo1aG56uu+hPaQ/1i/oFPpaHUxzZfd/ug8EZnCGZmWROw6K8nAbKJkX/FPUNQSpv9TXFl1jQ8H2GcfNvhm1GymjppZeB5uc/hSidxDMjBoAYc5HFfaA+BgK5fBFfXDI/UulWKI1B48+H5qQB/DkMkzTM8qq8ttCUWrS4ev3WcIVIa2M2HO4ggJR33Bx400lBaJx+cnu/4/LhP69N3beGcyjvoMoKTTwr5bc9/ymGErypTgyLNvfcLeAdYH2Q53lBm+CzELN/Lubt5khnQwDULIcuhZfY2aiUU+rKFUyplrw=
 branches:
   only:
     - master
